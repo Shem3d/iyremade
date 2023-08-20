@@ -2,8 +2,8 @@
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/thanhdat4461/OrionMoblie/main/source')))()
 -- Notification
 OrionLib:MakeNotification({
-	Name = "Virvx Hub",
-	Content = "Virvx Hub Successfully Loaded",
+	Name = "VirvX Hub",
+	Content = "VirvX Hub Launched",
 	Image = "rbxassetid://4483345998",
 	Time = 3
 })
@@ -16,6 +16,93 @@ OrionLib:MakeNotification({
 })
 -- Window
 local Window = OrionLib:MakeWindow({Name = "Virvx Hub", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
+-- Tab
+local Tab = Window:MakeTab({
+	Name = "Player",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+-- Slider
+local walkspeedSlider = Tab:AddSlider({
+    Name = "Walkspeed",
+    Min = 16,
+    Max = 500,
+    Default = 16,
+    Color = Color3.fromRGB(34, 0, 255),
+    Increment = 1,
+    ValueName = "Walkspeed",
+    Callback = function(Value)
+game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Value
+    end
+})
+-- Button
+local resetWalkspeedButton = Tab:AddButton({
+    Name = "Reset Walkspeed",
+    Callback = function()
+        walkspeedSlider:Set(16)
+game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
+    end
+})
+local jumpPowerSlider = Tab:AddSlider({
+    Name = "JumpPower",
+    Min = 50,
+    Max = 250,
+    Default = 50,
+    Color = Color3.fromRGB(34, 0, 255),
+    Increment = 1,
+    ValueName = "JumpPower",
+    Callback = function(Value)
+game.Players.LocalPlayer.Character.Humanoid.JumpPower = Value
+    end
+})
+-- Button
+local resetJumpPowerButton = Tab:AddButton({
+    Name = "Reset JumpPower",
+    Callback = function()
+        jumpPowerSlider:Set(50) 
+game.Players.LocalPlayer.Character.Humanoid.JumpPower = 50
+    end
+})
+local gravitySlider = Tab:AddSlider({
+    Name = "Gravity",
+    Min = 0,
+    Max = 196.2,
+    Default = 196.2,
+    Color = Color3.fromRGB(34, 0, 255),
+    Increment = 1,
+    ValueName = "Gravity",
+    Callback = function(Value)
+        game.Workspace.Gravity = Value
+    end
+})
+-- Button
+local resetGravityButton = Tab:AddButton({
+    Name = "Reset Gravity",
+    Callback = function()
+        gravitySlider:Set(196.2)
+        game.Workspace.Gravity = 196.2
+    end
+})
+local fovSlider = Tab:AddSlider({
+    Name = "FOV",
+    Min = 70,
+    Max = 120,
+    Default = 70,
+    Color = Color3.fromRGB(34, 0, 255),
+    Increment = 1,
+    ValueName = "FOV",
+    Callback = function(Value)
+        game.Workspace.CurrentCamera.FieldOfView = Value
+    end
+})
+-- Button
+local resetFOVButton = Tab:AddButton({
+    Name = "Reset FOV",
+    Callback = function()
+        fovSlider:Set(70)
+game.Workspace.CurrentCamera.FieldOfView = 70
+    end
+})
 -- Tab
 local Tab = Window:MakeTab({
 	Name = "Admin",
