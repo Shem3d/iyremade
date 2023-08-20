@@ -15,7 +15,7 @@ OrionLib:MakeNotification({
 	Time = 3
 })
 -- Window
-local Window = OrionLib:MakeWindow({Name = "Virvx Hub", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
+local Window = OrionLib:MakeWindow({Name = "Virvx Hub", IntroText = "VirvX V1", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
 -- Tab
 local Tab = Window:MakeTab({
 	Name = "Player",
