@@ -9,7 +9,7 @@ OrionLib:MakeNotification({
 })
 -- Notification
 OrionLib:MakeNotification({
-	Name = "Credits",
+	Name = "Developper",
 	Content = "Created by MkzZ",
 	Image = "rbxassetid://4483345998",
 	Time = 3
@@ -103,6 +103,61 @@ local resetFOVButton = Tab:AddButton({
 game.Workspace.CurrentCamera.FieldOfView = 70
     end
 })
+-- Tab
+local Tab = Window:MakeTab({
+	Name = "Main",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+local playerList = {}  -- Tableau pour stocker les noms des joueurs
+local selectedPlayer = nil  -- Nom du joueur sélectionné
+
+-- Fonction pour mettre à jour la liste des joueurs
+local function updatePlayerList()
+    playerList = {}  -- Réinitialiser le tableau
+    for _, player in ipairs(game.Players:GetPlayers()) do
+        table.insert(playerList, player.Name)
+    end
+
+    playerDropdown:Refresh(playerList, true)  -- Rafraîchir la liste déroulante et sélectionner la première option
+end
+
+-- Création de la liste déroulante (Dropdown)
+local playerDropdown = Tab:AddDropdown({
+    Name = "Player List",
+    Options = playerList,
+    Default = playerList[1],  -- Option sélectionnée par défaut
+    Callback = function(SelectedOption)
+        selectedPlayer = SelectedOption
+    end
+})
+
+-- Bouton pour téléporter vers le joueur sélectionné
+local teleportButton = Tab:AddButton({
+    Name = "Teleport",
+    Callback = function()
+        if selectedPlayer then
+            local targetPlayer = game.Players:FindFirstChild(selectedPlayer)
+            if targetPlayer then
+                local targetCharacter = targetPlayer.Character
+                if targetCharacter then
+                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = targetCharacter.HumanoidRootPart.CFrame
+                end
+            end
+        end
+    end
+})
+
+-- Bouton de rafraîchissement des joueurs
+local refreshPlayersButton = Tab:AddButton({
+    Name = "Refresh Players",
+    Callback = function()
+        updatePlayerList()
+    end
+})
+
+-- Appel initial pour remplir la liste des joueurs
+updatePlayerList()
 -- Tab
 local Tab = Window:MakeTab({
 	Name = "Admin",
